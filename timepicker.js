@@ -97,8 +97,6 @@ function timepicker(id) {
     // Calc coordinates for each tick
     var gen_vertices = function(data, radius, width, height) {
         return data.map(function(d,i) {
-            var width = parseInt(d3.select(id).style('width'));
-            var height = parseInt(d3.select(id).style('height'))-margin.bottom;
             var radian = ((360*(Math.PI/180))/data.length)*i;
             var x = radius * Math.sin(radian);
             var xx = width/2 + x;
