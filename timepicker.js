@@ -1,6 +1,6 @@
 function timepicker(id) {
 
-    var margin = {top: 50};
+    var margin = {bottom: 10};
     var width = 0;
     var height = 0;
     
@@ -98,7 +98,7 @@ function timepicker(id) {
     var gen_vertices = function(data, radius, width, height) {
         return data.map(function(d,i) {
             var width = parseInt(d3.select(id).style('width'));
-            var height = parseInt(d3.select(id).style('height'))-margin.top;
+            var height = parseInt(d3.select(id).style('height'))-margin.bottom;
             var radian = ((360*(Math.PI/180))/data.length)*i;
             var x = radius * Math.sin(radian);
             var xx = width/2 + x;
@@ -139,7 +139,7 @@ function timepicker(id) {
     // Main resize
     var resize = function() {
         width = parseInt(d3.select(id).style('width'));
-        height = parseInt(d3.select(id).style('height'))-margin.top;
+        height = parseInt(d3.select(id).style('height')) - margin.bottom;
 
         svg.attr({
             'width': width,
