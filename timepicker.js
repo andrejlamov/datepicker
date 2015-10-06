@@ -133,6 +133,11 @@ function timepicker(id) {
     // Nodes
     var points = svg.selectAll("circle");
 
+    // Frame
+
+    var frame = svg.append('circle')
+                   .attr('class', 'frame');
+
 
     // Main resize
     var resize = function() {
@@ -173,15 +178,24 @@ function timepicker(id) {
                  .attr("d", polygon);
 
 
-        // Nodes
-        var circle = svg.selectAll('circle')
-                         .data(vertices);
+        // Frame
+        frame.attr({
+            'cx': width/2,
+            'cy': height/2,
+            'r': radius
+        });
 
-        circle.enter().append("circle");
+        // Nodes
+        var circle = svg.selectAll('.node')
+                        .data(vertices);
+
+        circle.enter()
+              .append("circle")
+              .attr('class', 'node');
 
         circle.exit().remove();
 
-        svg.selectAll('circle')
+        svg.selectAll('.node')
            .attr("transform", function(d) { return "translate(" + d + ")"; })
            .attr("r", 1.5);
     };

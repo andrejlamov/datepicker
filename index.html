@@ -18,23 +18,27 @@
      -moz-user-select: none;
      -khtml-user-select: none;
      -webkit-user-select: none;
-         -o-user-select: none;
+     -o-user-select: none;
      overflow: hidden;
      -webkit-tap-highlight-color: rgba(0,0,0,0);
- }
-
-
- circle {
-     fill: black;
  }
 
  body {
      font-family: serif;
  }
 
- path {
+ .frame {
+     fill: none;
+     stroke: black;
+     stroke-width: 2;
+ }
+ .node {
+     fill: black;
+ }
+
+ .tick {
      fill: white;
-     stroke: lightGrey;
+     stroke: #E0E0E0;
  }
 
  path.minute_pointer {
