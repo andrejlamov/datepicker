@@ -68,13 +68,11 @@ function timepicker(id) {
 
             if(d.type == 'minute') {
                 path.style('opacity', 0.2)
-                    .style('fill', 'blue');
                 d3.selectAll('.minute_pointer')
                   .attr("d", pointer_line([backtip, origin, point]));
                 time[1] = d.value;
             } else {
                 path.style('opacity', 0.2)
-                    .style('fill', 'red');
                 d3.selectAll('.hour_pointer')
                   .attr("d", pointer_line([backtip, origin, point]));
                 time[0] = d.value;
@@ -130,9 +128,6 @@ function timepicker(id) {
                           .attr('d', pointer_line([[0,0],[0,0]]))
                           .attr('class', 'hour_pointer');
 
-    // Nodes
-    var points = svg.selectAll("circle");
-
     // Frame
 
     var frame = svg.append('circle')
@@ -184,20 +179,43 @@ function timepicker(id) {
             'cy': height/2,
             'r': radius
         });
+        var number_labels = ["12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+        var number_vert = gen_vertices(number_labels, radius*0.95, width, height)
+        var numbers = svg.selectAll(".number")
+            .data(number_vert)
+        numbers.enter()
+            .append("text")
+            .text(function(d,i) { return number_labels[i] })
+            .attr("class", "number")
+        numbers.attr("transform", function(d) { return "translate(" + d + ")"; })
+
+        var number_labels = ["00", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
+        var number_vert = gen_vertices(number_labels, radius*0.4, width, height)
+        var numbers = svg.selectAll(".number_24")
+            .data(number_vert)
+        numbers.enter()
+            .append("text")
+            .attr("opacity", 0.5)
+            .text(function(d,i) { return number_labels[i] })
+            .attr("class", "number_24")
+        numbers.attr("transform", function(d) { return "translate(" + d + ")"; })
+
+        
 
         // Nodes
-        var circle = svg.selectAll('.node')
-                        .data(vertices);
+        // var circle = svg.selectAll('.node')
+        //                 .data(voro_data);
 
-        circle.enter()
-              .append("circle")
-              .attr('class', 'node');
+        // circle.enter()
+        //     .append("text")
+        //     .attr('class', 'node')
+        //     .text(function(d) { return d.d.value })
+        
+        // circle.exit().remove();
 
-        circle.exit().remove();
-
-        svg.selectAll('.node')
-           .attr("transform", function(d) { return "translate(" + d + ")"; })
-           .attr("r", 1.5);
+        // svg.selectAll('.node')
+        //    .attr("transform", function(d) { return "translate(" + d.point + ")"; })
+        //    .attr("r", 1.5);
     };
 
     return {
